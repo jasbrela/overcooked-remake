@@ -321,7 +321,8 @@ GameObject:
   - component: {fileID: 1007661608}
   - component: {fileID: 1007661607}
   - component: {fileID: 1007661606}
-  m_Layer: 0
+  - component: {fileID: 1007661610}
+  m_Layer: 6
   m_Name: BasicStation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -414,6 +415,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1007661610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007661605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bf643c8445dae478bb9d9afc30fcef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1278972558
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,9 +439,10 @@ GameObject:
   - component: {fileID: 1278972561}
   - component: {fileID: 1278972560}
   - component: {fileID: 1278972559}
-  - component: {fileID: 1278972564}
-  - component: {fileID: 1278972563}
   - component: {fileID: 1278972565}
+  - component: {fileID: 1278972563}
+  - component: {fileID: 1278972564}
+  - component: {fileID: 1278972566}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -563,7 +577,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1278972558}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea43af90d7fde43b44aa3b13cc7067, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e8e1034860d38f4b9a4732b7b4e344d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   force: 65
@@ -595,6 +609,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &1278972566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278972558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad0cc56077cee54d8e07389985bccf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 1.5
+  interactableMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1846869443
 GameObject:
   m_ObjectHideFlags: 0
