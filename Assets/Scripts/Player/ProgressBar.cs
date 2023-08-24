@@ -22,7 +22,7 @@ namespace Player
             if (_progress != null) StopCoroutine(_progress);
         }
 
-        private void ResetProgress()
+        public void ResetProgress()
         {
             PauseProgress();
             

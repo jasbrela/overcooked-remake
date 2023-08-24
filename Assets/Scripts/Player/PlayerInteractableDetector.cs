@@ -11,7 +11,7 @@ namespace Player
         [SerializeField] private LayerMask interactableMask;
         [SerializeField] private Transform snapPoint;
 
-        private IInteractable _currentTarget;
+        private IInteractable _currentInteractable;
         private ISurface _currentSurface;
         
         private Item _currentItem;
@@ -92,9 +92,9 @@ namespace Player
             
             if (interactable != null)
             {
-                if (_currentTarget == interactable) return;
+                if (_currentInteractable == interactable) return;
                 
-                _currentTarget = interactable;
+                _currentInteractable = interactable;
             }
             else ResetTarget();
         }
@@ -109,8 +109,9 @@ namespace Player
 
                 bool canPick = _currentItem == null && surface.HasItem;
                 bool canPlace = _currentItem != null && !surface.HasItem;
-
-                if (!canPick && !canPlace) continue;
+                bool canCombine = _currentItem != null && surface.HasItem;
+                
+                if (!canPick && !canPlace && !canCombine) continue;
                 
                 _currentSurface = surface;
                 return;
@@ -121,10 +122,10 @@ namespace Player
     
         private void ResetTarget()
         {
-            if (_currentTarget == null) return;
+            if (_currentInteractable == null) return;
 
-            _currentTarget.CancelInteraction();
-            _currentTarget = null;
+            _currentInteractable.CancelInteraction();
+            _currentInteractable = null;
         }
         
         private void ResetSurface()
@@ -141,9 +142,9 @@ namespace Player
         {
             CheckForInteractable();
             
-            if (_currentTarget == null) return;
+            if (_currentInteractable == null) return;
             
-            _currentTarget.OnInteract();
+            _currentInteractable.OnInteract();
         }
         
         private void CheckSurfaces(InputAction.CallbackContext ctx)
@@ -165,18 +166,16 @@ namespace Player
             }
             else
             {
-                _currentItem.transform.parent = null;
-
-                _currentSurface.Place(_currentItem);
-                _currentItem = null;
+                if (_currentSurface.Combine(_currentItem)) return;
+                if (_currentSurface.Place(_currentItem)) _currentItem = null;
             }
         }
     
         private void CancelInteraction(InputAction.CallbackContext ctx)
         {
-            if (_currentTarget == null) return;
+            if (_currentInteractable == null) return;
             
-            _currentTarget.CancelInteraction();
+            _currentInteractable.CancelInteraction();
         }
     }
 }

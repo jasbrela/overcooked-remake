@@ -1,6 +1,8 @@
 public interface ISurface
 {
     public bool HasItem { get; }
-    public void Place(Item item);
+    public Item Item { get; }
+    public bool Place(Item item);
     public Item Pick();
+    public bool Combine(Item item);
 }

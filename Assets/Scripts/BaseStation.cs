@@ -1,12 +1,13 @@
 using Player;
 using UnityEngine;
 
-public class BaseStation : BaseSurface, IInteractable
+public abstract class BaseStation : BaseSurface
 {
-    [SerializeField] private bool hold;
+    [SerializeField] private bool hold = true;
     [SerializeField] private ProgressBar progress;
-    [SerializeField] private StationType type;
-    
+    [SerializeField] private StationType stationType;
+
+    protected ProgressBar ProgressBar => progress;
     public bool MustHold => hold;
 
     private void Start()
@@ -16,36 +17,30 @@ public class BaseStation : BaseSurface, IInteractable
 
     private void OnFinish()
     {
-        Craft();
+        Cook();
     }
-
-    public void OnInteract()
+    
+    protected void Use()
     {
         if (CurrentItem == null) return;
-        if (CurrentItem.GetCraftedItem(type) == null) return;
-        
+        if (CurrentItem.GetCraftedItem(stationType) == null) return;
+
         if (MustHold)
         {
             progress.StartProgress();
-            return;
-        }
-        
-        Craft();
+        } else Cook();
     }
 
-    private void Craft()
-    {
-        if (CurrentItem == null) return;
+    protected override void OnItemPicked() => progress.ResetProgress();
 
-        var item = CurrentItem.GetCraftedItem(type);
+    private void Cook()
+    {
+        if (!HasItem) return;
+
+        var item = CurrentItem.GetCraftedItem(stationType);
         if (item == null) return;
         
         Destroy(CurrentItem.gameObject);
         CurrentItem = Instantiate(item, snapPoint.position, snapPoint.rotation);
-    }
-
-    public void CancelInteraction()
-    {
-        progress.PauseProgress();
     }
 }
