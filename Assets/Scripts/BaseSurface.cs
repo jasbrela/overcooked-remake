@@ -6,7 +6,6 @@ public class BaseSurface : MonoBehaviour, ISurface
     [SerializeField] protected Transform snapPoint;
     
     protected Item CurrentItem;
-    public Item Item => CurrentItem;
     
     public bool HasItem => CurrentItem != null;
 

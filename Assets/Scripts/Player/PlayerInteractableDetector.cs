@@ -96,7 +96,7 @@ namespace Player
                 
                 _currentInteractable = interactable;
             }
-            else ResetTarget();
+            else ResetInteractable();
         }
         
         private void CheckForSurface()
@@ -120,7 +120,7 @@ namespace Player
             ResetSurface();
         }
     
-        private void ResetTarget()
+        private void ResetInteractable()
         {
             if (_currentInteractable == null) return;
 

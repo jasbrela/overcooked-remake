@@ -17,11 +17,17 @@ namespace Player
 
         private void Start() => ResetProgress();
 
+        /// <summary>
+        /// Pauses the progress bar charging
+        /// </summary>
         public void PauseProgress()
         {
             if (_progress != null) StopCoroutine(_progress);
         }
-
+        
+        /// <summary>
+        /// Hide the progress bar and reset its value.
+        /// </summary>
         public void ResetProgress()
         {
             PauseProgress();
@@ -31,6 +37,9 @@ namespace Player
             _currentProgress = 0;
         }
 
+        /// <summary>
+        /// Start charging the progress bar.
+        /// </summary>
         public void StartProgress()
         {
             slider.gameObject.SetActive(true);
