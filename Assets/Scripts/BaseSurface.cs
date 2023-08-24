@@ -1,3 +1,4 @@
+using Player;
 using UnityEngine;
 
 public class BaseSurface : MonoBehaviour, ISurface
@@ -35,6 +36,7 @@ public class BaseSurface : MonoBehaviour, ISurface
 
     protected virtual void OnItemPlaced() { }
     protected virtual void OnItemPicked() { }
+    protected virtual void OnItemCombined() { }
     
     public Item Pick()
     {
@@ -56,6 +58,8 @@ public class BaseSurface : MonoBehaviour, ISurface
         combined ??= CurrentItem.CheckCombination(item);
 
         if (combined == null) return false;
+        
+        OnItemCombined();
         
         Destroy(item.gameObject);
         Destroy(CurrentItem.gameObject);

@@ -34,6 +34,7 @@ public abstract class BaseStation : BaseSurface
     }
 
     protected override void OnItemPicked() => progress.ResetProgress();
+    protected override void OnItemCombined() => progress.ResetProgress();
 
     /// <summary>
     /// Turn the current item into the final cooked item.
