@@ -1,23 +1,16 @@
 using Player;
 using UnityEngine;
 
-public class BaseStation : MonoBehaviour, IInteractable, ISurface
+public class BaseStation : BaseSurface, IInteractable
 {
-    [SerializeField] private Transform snapPoint;
-    [SerializeField] private Item startingItem;
     [SerializeField] private bool hold;
     [SerializeField] private ProgressBar progress;
     [SerializeField] private StationType type;
-
-    private Item _currentItem;
-
-    public bool HasItem => _currentItem != null;
-
+    
     public bool MustHold => hold;
 
     private void Start()
     {
-        if (startingItem) Place(startingItem);
         if (MustHold) progress.OnFinish += OnFinish;
     }
 
@@ -28,7 +21,8 @@ public class BaseStation : MonoBehaviour, IInteractable, ISurface
 
     public void OnInteract()
     {
-        if (_currentItem == null) return;
+        if (CurrentItem == null) return;
+        if (CurrentItem.GetCraftedItem(type) == null) return;
         
         if (MustHold)
         {
@@ -41,35 +35,17 @@ public class BaseStation : MonoBehaviour, IInteractable, ISurface
 
     private void Craft()
     {
-        if (_currentItem == null) return;
+        if (CurrentItem == null) return;
 
-        var item = _currentItem.GetCraftedItem(type);
+        var item = CurrentItem.GetCraftedItem(type);
         if (item == null) return;
         
-        Destroy(_currentItem.gameObject);
-        _currentItem = Instantiate(item, snapPoint.position, snapPoint.rotation);
+        Destroy(CurrentItem.gameObject);
+        CurrentItem = Instantiate(item, snapPoint.position, snapPoint.rotation);
     }
 
     public void CancelInteraction()
     {
         progress.PauseProgress();
-    }
-    
-    public void Place(Item item)
-    {
-        _currentItem = item;
-        
-        Transform t = item.gameObject.transform;
-        t.position = snapPoint.position;
-        t.rotation = snapPoint.rotation;
-    }
-
-    public Item Pick()
-    {
-        Item temp = _currentItem;
-        
-        _currentItem = null;
-        
-        return temp;
     }
 }

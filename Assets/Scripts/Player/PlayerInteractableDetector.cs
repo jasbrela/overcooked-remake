@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -30,13 +31,21 @@ namespace Player
 
         private T ScanForElement<T>()
         {
+            var center = transform.position;
+            
             var results = new Collider[5];
-            var size = Physics.OverlapSphereNonAlloc(transform.position, radius, results, interactableMask);
+            var size = Physics.OverlapSphereNonAlloc(center, radius, results, interactableMask);
             
             if (size == 0) return default;
             T elem = default;
-
-            foreach (Collider col in results)
+            
+            var ordered = results.OrderBy(c =>
+            {
+                if (c == null) return 999;
+                return (center - c.transform.position).sqrMagnitude;
+            }).ToArray();
+            
+            foreach (Collider col in ordered)
             {
                 if (elem != null) break;
                 col.TryGetComponent(out elem);
@@ -46,16 +55,24 @@ namespace Player
         
         private T[] ScanForList<T>()
         {
+            var center = transform.position;
+
             var results = new Collider[5];
-            var size = Physics.OverlapSphereNonAlloc(transform.position, radius, results, interactableMask);
+            var size = Physics.OverlapSphereNonAlloc(center, radius, results, interactableMask);
             
+            var ordered = results.OrderBy(c =>
+            {
+                if (c == null) return 999;
+                return (center - c.transform.position).sqrMagnitude;
+            }).ToArray();
+
             var list = new T[5];
             
             var i = 0;
             
             if (size == 0) return list;
 
-            foreach (Collider col in results)
+            foreach (Collider col in ordered)
             {
                 if (col == null) continue;
                 
@@ -85,20 +102,21 @@ namespace Player
         private void CheckForSurface()
         {
             ISurface[] surfaces = ScanForList<ISurface>();
+            
             foreach (ISurface surface in surfaces)
             {
                 if (surface == null) continue;
 
                 bool canPick = _currentItem == null && surface.HasItem;
                 bool canPlace = _currentItem != null && !surface.HasItem;
+
+                if (!canPick && !canPlace) continue;
                 
-                if (canPick || canPlace)
-                {
-                    _currentSurface = surface;
-                }
+                _currentSurface = surface;
+                return;
             }
             
-            if (_currentSurface == null) ResetSurface();
+            ResetSurface();
         }
     
         private void ResetTarget()

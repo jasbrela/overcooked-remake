@@ -115,7 +115,7 @@
                     "name": "",
                     "id": "a9990464-9d22-46f6-96b3-e75a66da17d2",
                     "path": "<Keyboard>/e",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "processors": "",
                     "groups": "Desktop",
                     "action": "Interact",
@@ -125,7 +125,7 @@
                 {
                     "name": "",
                     "id": "9aba4716-1f28-48e7-bdad-892fbefa099d",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "Desktop",
