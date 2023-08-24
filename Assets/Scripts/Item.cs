@@ -1,9 +1,21 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Item")]
-public class Item : ScriptableObject
+public class Item : MonoBehaviour
 {
-    public Item handsResult;
-    public Item cutResult;
-    public Item stoveResult;
+    [SerializeField] private Item handsResult;
+    [SerializeField] private Item cutResult;
+    [SerializeField] private Item stoveResult;
+
+    public Item GetCraftedItem(StationType type)
+    {
+        switch (type)
+        {
+            case StationType.Hands: return handsResult;
+            case StationType.Cut: return cutResult;
+            case StationType.Stove: return stoveResult;
+            
+            default:
+                return null;
+        }
+    }
 }
