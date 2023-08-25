@@ -20,11 +20,14 @@ public abstract class BaseStation : BaseSurface
     /// <summary>
     /// If the player must hold to cook, waits for it before cooking the item.
     /// Otherwise, cooks immediately.
+    /// You can't cook plated food.
     /// </summary>
     protected void Use()
     {
-        if (CurrentItem == null) return;
-        if (CurrentItem.GetCraftedItem(stationType) == null) return;
+        if (!HasItem) return;
+        if (!(CurrentItem is Food currentFood)) return;
+        if (currentFood.IsPlated) return;
+        if (currentFood.GetCraftedItem(stationType) == null) return;
 
         if (WaitToCook)
         {
@@ -41,8 +44,9 @@ public abstract class BaseStation : BaseSurface
     private void Cook()
     {
         if (!HasItem) return;
+        if (!(CurrentItem is Food currentFood)) return;
 
-        var item = CurrentItem.GetCraftedItem(stationType);
+        var item = currentFood.GetCraftedItem(stationType);
         if (item == null) return;
         
         Destroy(CurrentItem.gameObject);

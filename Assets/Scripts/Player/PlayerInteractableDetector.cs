@@ -166,7 +166,12 @@ namespace Player
             }
             else
             {
-                if (_currentSurface.Combine(_currentItem)) return;
+                if (_currentSurface.Combine(_currentItem))
+                {
+                    _currentItem = null;
+                    return;
+                }
+                
                 if (_currentSurface.Place(_currentItem)) _currentItem = null;
             }
         }

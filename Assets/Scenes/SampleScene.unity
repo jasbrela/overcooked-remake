@@ -466,7 +466,7 @@ Transform:
   m_GameObject: {fileID: 785452572}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.07, y: 1.6, z: 3.13}
+  m_LocalPosition: {x: -3.426, y: 1.56, z: 3.13}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -711,7 +711,7 @@ Transform:
   m_GameObject: {fileID: 1007661605}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.42600012, y: 1.06, z: 3.13}
+  m_LocalPosition: {x: 0.75, y: 1.06, z: 3.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -769,7 +769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d3662fc7bfda924caac8208dc2dcb17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingItem: {fileID: 6907061316377358260, guid: 05dcbd8cff6819a4b875e3b3fc93bcc7, type: 3}
+  startingItem: {fileID: 989539268231221977, guid: 82749aaeefc406b4186adec67c4989fc, type: 3}
   snapPoint: {fileID: 1561363750}
 --- !u!65 &1262883965
 BoxCollider:
@@ -1090,7 +1090,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d3662fc7bfda924caac8208dc2dcb17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingItem: {fileID: 0}
+  startingItem: {fileID: 989539268231221977, guid: 82749aaeefc406b4186adec67c4989fc, type: 3}
   snapPoint: {fileID: 974563403}
 --- !u!65 &1485817780
 BoxCollider:
