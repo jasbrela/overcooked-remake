@@ -12,6 +12,8 @@ public class Item : MonoBehaviour
     [SerializeField] private Item cutResult;
     [SerializeField] private Item stoveResult;
 
+    public int Id => id;
+
     private void Start()
     {
         foreach (var combination in combinations)

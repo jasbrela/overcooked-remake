@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 4786894955168543164}
   - component: {fileID: 6907061316377358260}
   m_Layer: 0
-  m_Name: CompletedItem
+  m_Name: Hamburger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
