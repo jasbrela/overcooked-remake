@@ -125,5 +125,6 @@ MonoBehaviour:
   cutResult: {fileID: 0}
   stoveResult: {fileID: 0}
   combinations:
-  - combineWith: {fileID: 8099318331325677774, guid: 0fa40061629de874da12d4aced018cb3, type: 3}
+  - mustBePlated: 1
+    combineWith: {fileID: 8099318331325677774, guid: 0fa40061629de874da12d4aced018cb3, type: 3}
     result: {fileID: 6907061316377358260, guid: 1d633936d10877b4f9cc6ec5c5431dff, type: 3}

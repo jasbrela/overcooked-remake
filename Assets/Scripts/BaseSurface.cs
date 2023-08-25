@@ -84,46 +84,48 @@ public class BaseSurface : MonoBehaviour, ISurface
         if (CurrentItem is Food currentFood)
         {
             if (item is Food food)
-            {
-                var combined = food.CheckCombination(currentFood);
+                return CombineFood(currentFood, food);
 
-                combined ??= currentFood.CheckCombination(food);
-
-                if (combined == null) return false;
-
-                OnItemCombined();
-
-                Destroy(food.gameObject);
-                Destroy(currentFood.gameObject);
-
-                CurrentItem = Instantiate(combined, snapPoint.position, snapPoint.rotation);
-                
-                return true;
-            }
-            
-            if (item is Plate plate)
-            {
-                if (!currentFood.IsPlateable) return false;
+            if (item is Plate plate && currentFood.IsPlateable)
                 return currentFood.Plate(plate.Pick());
-            }
+            
         }
         
         if (CurrentItem is Plate currentPlate)
         {
-            if (item is Food food)
+            if (item is Food { IsPlateable: true } food)
             {
-                if (!food.IsPlateable) return false;
-
-                CurrentItem = food;
-                return food.Plate(currentPlate.Pick());
+                if (food.Plate(currentPlate.Pick()))
+                {
+                    CurrentItem = null;
+                    return Place(food);
+                }
             }
             
             if (item is Plate plate)
-            {
                 return currentPlate.Stack(plate);
-            }
+            
         }
 
         return false;
+    }
+
+    private bool CombineFood(Food current, Food other)
+    {
+        var combined = other.CheckCombination(current);
+
+        combined ??= current.CheckCombination(other);
+
+        if (combined == null) return false;
+
+        OnItemCombined();
+        var p = other.RemovePlate();
+        Destroy(other.gameObject);
+        Destroy(current.gameObject);
+
+        CurrentItem = Instantiate(combined, snapPoint.position, snapPoint.rotation);
+        ((Food)CurrentItem).Plate(p);
+                
+        return true;
     }
 }

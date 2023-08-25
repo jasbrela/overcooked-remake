@@ -14,6 +14,7 @@ public class Food : Item
     public bool IsPlateable => isPlateable;
     public bool IsPlated => _isPlated;
     
+    private Plate _plate;
     private bool _isPlated;
     
     private void Start()
@@ -41,7 +42,10 @@ public class Food : Item
     {
         foreach (var combination in combinations)
         {
-            if (combination.combineWith.Id == food.Id) return combination.result;
+            if (combination.combineWith.Id == food.Id)
+            {
+                if (combination.mustBePlated && IsPlated ^ food.IsPlated || !combination.mustBePlated) return combination.result;
+            }
         }
 
         return null;
@@ -51,6 +55,7 @@ public class Food : Item
     {
         if (!isPlateable || _isPlated) return false;
         _isPlated = true;
+        _plate = plate;
         
         var plateTransform = plate.transform;
         var t = transform;
@@ -60,5 +65,11 @@ public class Food : Item
         plateTransform.rotation = t.rotation;
 
         return true;
+    }
+
+    public Plate RemovePlate()
+    {
+        _plate.transform.parent = null;
+        return _plate;
     }
 }

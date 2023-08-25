@@ -120,8 +120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 004b0921c092db94d83e901ab35419d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combinations: []
   id: 2
+  isPlate: 0
+  isPlateable: 0
   handsResult: {fileID: 0}
   cutResult: {fileID: 0}
   stoveResult: {fileID: 8099318331325677774, guid: 0fa40061629de874da12d4aced018cb3, type: 3}
+  combinations: []

@@ -39,13 +39,9 @@ namespace Player
             if (size == 0) return default;
             T elem = default;
             
-            var ordered = results.OrderBy(c =>
-            {
-                if (c == null) return 999;
-                return (center - c.transform.position).sqrMagnitude;
-            }).ToArray();
+            var ordered = results.Where(col => col != null).OrderBy(c => (center - c.transform.position).sqrMagnitude).ToArray();
             
-            foreach (Collider col in ordered)
+            foreach (Collider col in ordered)   
             {
                 if (elem != null) break;
                 col.TryGetComponent(out elem);
@@ -60,12 +56,8 @@ namespace Player
             var results = new Collider[5];
             var size = Physics.OverlapSphereNonAlloc(center, radius, results, interactableMask);
             
-            var ordered = results.OrderBy(c =>
-            {
-                if (c == null) return 999;
-                return (center - c.transform.position).sqrMagnitude;
-            }).ToArray();
-
+            var ordered = results.Where(col => col != null).OrderBy(c => (center - c.transform.position).sqrMagnitude).ToArray();
+            
             var list = new T[5];
             
             var i = 0;
@@ -74,8 +66,6 @@ namespace Player
 
             foreach (Collider col in ordered)
             {
-                if (col == null) continue;
-                
                 col.TryGetComponent(out T elem);
                 
                 if (elem == null) continue;
