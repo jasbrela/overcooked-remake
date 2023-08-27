@@ -119,12 +119,16 @@ public class BaseSurface : MonoBehaviour, ISurface
         if (combined == null) return false;
 
         OnItemCombined();
-        var p = other.RemovePlate();
+        Plate p = null;
+        
+        if (other.IsPlated) p = other.RemovePlate();
+        if (current.IsPlated) p = current.RemovePlate();
+        
         Destroy(other.gameObject);
         Destroy(current.gameObject);
 
         CurrentItem = Instantiate(combined, snapPoint.position, snapPoint.rotation);
-        ((Food)CurrentItem).Plate(p);
+        if (p != null) ((Food)CurrentItem).Plate(p);
                 
         return true;
     }

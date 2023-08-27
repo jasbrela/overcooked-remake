@@ -12,10 +12,9 @@ public class Food : Item
     [SerializeField] private List<Combination> combinations = new();
 
     public bool IsPlateable => isPlateable;
-    public bool IsPlated => _isPlated;
+    public bool IsPlated => _plate != null;
     
     private Plate _plate;
-    private bool _isPlated;
     
     private void Start()
     {
@@ -53,8 +52,7 @@ public class Food : Item
 
     public bool Plate(Plate plate)
     {
-        if (!isPlateable || _isPlated) return false;
-        _isPlated = true;
+        if (!isPlateable || IsPlated) return false;
         _plate = plate;
         
         var plateTransform = plate.transform;
@@ -69,7 +67,13 @@ public class Food : Item
 
     public Plate RemovePlate()
     {
+        if (!IsPlated) return null;
+
         _plate.transform.parent = null;
-        return _plate;
+            
+        var plate = _plate;
+        _plate = null;
+        
+        return plate;
     }
 }

@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Order", fileName = "New Order")]
-public class OrderData : ScriptableObject
+public class Order : ScriptableObject
 {
+    [SerializeField] public Sprite sprite;
     [SerializeField] public Food finalItem;
     [SerializeField] public int price;
 }

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758e7c3bbfd3f3a4696158314a2057c8, type: 3}
   m_Name: Hamburger
   m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 701ee4d46ba14944eadefb5f4b36bc0d, type: 3}
   finalItem: {fileID: 6907061316377358260, guid: 1d633936d10877b4f9cc6ec5c5431dff, type: 3}
-  price: 0
+  price: 15
