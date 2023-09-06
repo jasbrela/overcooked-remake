@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 10
+  mesh: {fileID: 5246495930399342966}
   maxStack: 4
 --- !u!1001 &4903898351150398503
 PrefabInstance:
@@ -111,5 +112,10 @@ PrefabInstance:
 --- !u!4 &4865186039126039500 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 703ba57e037f77342a258354ed05c0c3, type: 3}
+  m_PrefabInstance: {fileID: 4903898351150398503}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5246495930399342966 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 703ba57e037f77342a258354ed05c0c3, type: 3}
   m_PrefabInstance: {fileID: 4903898351150398503}
   m_PrefabAsset: {fileID: 0}

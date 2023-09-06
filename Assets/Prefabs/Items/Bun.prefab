@@ -45,13 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 004b0921c092db94d83e901ab35419d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  id: 1
   isPlateable: 1
-  handsResult: {fileID: 3994960370804851950, guid: 24b2c93e1b395da4087dcd3d252e8c7a, type: 3}
+  handsResult: {fileID: 0}
   cutResult: {fileID: 0}
   stoveResult: {fileID: 0}
   combinations:
-  - mustBePlated: 1
+  - mustBePlated: 0
     combineWith: {fileID: 8099318331325677774, guid: 0fa40061629de874da12d4aced018cb3, type: 3}
     result: {fileID: 6907061316377358260, guid: 1d633936d10877b4f9cc6ec5c5431dff, type: 3}
 --- !u!1001 &7245631116048400366

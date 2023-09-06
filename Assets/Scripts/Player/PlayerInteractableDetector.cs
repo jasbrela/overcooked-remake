@@ -147,12 +147,7 @@ namespace Player
             {
                 _currentItem = _currentSurface.Pick();
                                     
-                Transform t = _currentItem.transform;
-                    
-                t.position = snapPoint.position;
-                t.rotation = snapPoint.rotation;
-
-                t.parent = snapPoint;
+                _currentItem.Snap(snapPoint);
             }
             else
             {

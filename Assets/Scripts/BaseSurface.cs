@@ -28,11 +28,7 @@ public class BaseSurface : MonoBehaviour, ISurface
         
         CurrentItem = item;
         
-        Transform t = item.gameObject.transform;
-        t.position = snapPoint.position;
-        t.rotation = snapPoint.rotation;
-
-        t.parent = snapPoint;
+        CurrentItem.Snap(snapPoint);
         
         OnItemPlaced();
         return true;
@@ -76,7 +72,7 @@ public class BaseSurface : MonoBehaviour, ISurface
     /// If both of them are plates, stack the plates.
     /// </summary>
     /// <param name="item">The food you provide for the combination.</param>
-    /// <returns>If the combination was a success</returns>
+    /// <returns>Whether the combination was successful</returns>
     public bool Combine(Item item)
     {
         if (!HasItem) return false;
@@ -93,6 +89,15 @@ public class BaseSurface : MonoBehaviour, ISurface
         
         if (CurrentItem is Plate currentPlate)
         {
+            if (currentPlate.CurrentStack > 1)
+            {
+                if (item is Food { IsPlateable: true } food2)
+                {
+                    food2.Plate(currentPlate.Pick());
+                    return false;
+                }
+            }
+            
             if (item is Food { IsPlateable: true } food)
             {
                 if (food.Plate(currentPlate.Pick()))

@@ -18,9 +18,6 @@ public class Level : MonoBehaviour
     [SerializeField] private Timer timer;
     [SerializeField] private float secondsBetweenOrders = 1f;
     [SerializeField] private int totalSeconds = 60 * 3;
-
-    private float _playerScore;
-    private float _currentScore;
     
     private float _totalProbability;
     private Coroutine _spawn;
@@ -36,12 +33,6 @@ public class Level : MonoBehaviour
         _spawn = StartCoroutine(Order());
         
         timer.OnFinish += OnFinish;
-        activeOrders.OnRemove += OnRemove;
-    }
-
-    private void OnRemove(Order order)
-    {
-        _playerScore += order.price;
     }
 
     private void OnFinish() => StopCoroutine(_spawn);

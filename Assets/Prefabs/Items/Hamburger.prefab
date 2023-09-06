@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 004b0921c092db94d83e901ab35419d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  id: 2
   isPlateable: 1
   handsResult: {fileID: 0}
   cutResult: {fileID: 0}

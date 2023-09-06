@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Plate : Item
 {
+    [SerializeField] private GameObject mesh;
     [SerializeField] private int maxStack = 4;
     private readonly Stack<Plate> _plates = new();
 
@@ -30,22 +31,33 @@ public class Plate : Item
     /// Add a plate to the stack
     /// </summary>
     /// <param name="plate">The plate you want to stack</param>
+    /// <param name="force">"True" to ignore the max stack check.</param>
     /// <returns>True if the plate was successfully stacked.</returns>
-    public bool Stack(Plate plate)
+    public bool Stack(Plate plate, bool force = false)
     {
-        if (CurrentStack >= maxStack) return false;
+        if (!force && CurrentStack >= maxStack) return false;
         
         _plates.Push(plate);
         
-        Debug.Log($"Added a plate to the stack. Current length: {CurrentStack}");
+        Debug.Log($"Added a plate to the stack. Current length: {CurrentStack}/{maxStack}");
 
         var plateTransform = plate.transform;
         var t = transform;
         
         plateTransform.parent = t;
-        plateTransform.position = t.position + (Vector3.up * 0.1f);
+        plateTransform.position = t.position + (Vector3.up * 0.03f);
         plateTransform.rotation = t.rotation;
         
         return true;
+    }
+
+    public void Hide()
+    {
+        mesh.SetActive(false);
+    }
+    
+    public void Show()
+    {
+        mesh.SetActive(true);
     }
 }
